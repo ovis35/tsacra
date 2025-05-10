@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 780 160" xmlns="http://www.w3.org/2000/svg"
+     role="img" aria-labelledby="title">
+  <title id="title">TSACRA.org 純文字標誌</title>
+
+  <text x="0" y="120"
+        font-family="'Inter','Noto Sans TC',sans-serif"
+        font-weight="700"
+        font-size="120"
+        fill="#006e62">
+    <!-- 前段：TSACRA，字母間距 16 -->
+    <tspan letter-spacing="16">TSACRA</tspan>
+    <!-- 後段：.org，緊貼並縮小字級 -->
+    <tspan dx="4" font-size="100">.org</tspan>
+  </text>
+</svg>

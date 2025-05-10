@@ -1,0 +1,162 @@
+/* --------------------------------------------------
+   1. Variables
+-------------------------------------------------- */
+:root{
+  /* Brand palette ── 將主色加深至 WCAG 4.5:1 以上 */
+  --primary:#0e5a26;     /* 深葉綠（對比提升） */
+  --accent:#529407;      /* 點綴亮綠 */
+  --bg-soft:#f5f5ec;     /* 米白背景 */
+
+  /* Typography & layout */
+  --text:#2d2d2d;
+  --font-sans:'Noto Sans TC','Open Sans',sans-serif;
+  --radius:8px;
+  --shadow:0 4px 16px rgba(0,0,0,.06);
+  --max-w:1200px;
+}
+
+/* --------------------------------------------------
+   2. Reset / Base
+-------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:var(--font-sans);
+  line-height:1.6;
+  color:var(--text);
+  background:var(--bg-soft);
+  /* 移除全域 letter-spacing 以符合中文排版 */
+}
+a{
+  color:var(--primary);
+  text-decoration:none;
+}
+a:hover,
+a:focus{
+  text-decoration:underline;
+}
+img{max-width:100%;height:auto}
+.container{width:90%;max-width:var(--max-w);margin:0 auto;padding:1rem 0}
+
+/* --------------------------------------------------
+   3. Header / Nav  (mobile-first)
+-------------------------------------------------- */
+.site-header{
+  background:#fff;
+  border-bottom:1px solid #e5e5e5;
+  position:sticky;top:0;z-index:100;
+  box-shadow:var(--shadow);
+}
+/* 用 flex 分離，避免 inline-style */
+.header-flex{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+
+.logo{margin:0;display:flex;align-items:center}
+
+/*── 行動裝置漢堡 ──────────────────────────*/
+.nav-toggle{
+  display:block;
+  width:44px;height:44px;
+  background:none;border:none;padding:0;
+  cursor:pointer;
+}
+.nav-toggle .bar{
+  display:block;width:24px;height:2px;
+  background:var(--text);
+  margin:6px auto;transition:transform .3s,opacity .3s;
+}
+
+/*── 導覽列 ────────────────────────────────*/
+.main-nav{
+  position:absolute;       /* 行動版浮動下拉 */
+  top:100%;left:0;width:100%;
+  background:#fff;
+  box-shadow:var(--shadow);
+  display:none;            /* 預設關閉 */
+}
+.main-nav ul{
+  list-style:none;margin:0;padding:.5rem 0;
+  display:flex;flex-direction:column;gap:.25rem;
+}
+.main-nav a{
+  padding:.75rem 1.25rem;
+  font-weight:500;
+  border-radius:0;         /* 行動版不圓角 */
+}
+.main-nav a:hover{background:var(--primary);color:#fff}
+
+/*── 漢堡開啟狀態 ───────────────────────────*/
+.site-header.nav-open .main-nav{display:block}
+.site-header.nav-open .nav-toggle .bar:nth-child(1){
+  transform:translateY(8px) rotate(45deg);
+}
+.site-header.nav-open .nav-toggle .bar:nth-child(2){
+  opacity:0;
+}
+.site-header.nav-open .nav-toggle .bar:nth-child(3){
+  transform:translateY(-8px) rotate(-45deg);
+}
+
+/* --------------------------------------------------
+   4. Hero
+-------------------------------------------------- */
+.hero{
+  background:linear-gradient(135deg,rgba(14,90,38,.85),rgba(82,148,7,.85)),
+             url('/images/hero-banner.jpg') center/cover;
+  color:#fff;text-align:center;padding:6rem 0;
+}
+.hero h2{margin:0 0 1rem;font-size:clamp(2rem,5vw,3rem);font-weight:700}
+.hero p{font-size:1.125rem;opacity:.9}
+
+/* --------------------------------------------------
+   5. Components
+-------------------------------------------------- */
+.button{
+  display:inline-block;background:var(--accent);color:#fff;border:none;
+  padding:.75rem 1.5rem;border-radius:var(--radius);
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  transition:transform .15s,box-shadow .15s
+}
+.button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,.15)
+}
+
+.card,.news-item,.project-item{
+  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:1.5rem;margin-bottom:1.5rem;transition:transform .2s
+}
+.card:hover,.news-item:hover,.project-item:hover{transform:translateY(-4px)}
+
+/* 表單元件省略（原樣保留） */
+
+/* 動畫：尊重使用者設定 */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){
+  .fade-up{animation:none}
+}
+
+/* --------------------------------------------------
+   6. Footer
+-------------------------------------------------- */
+.site-footer{
+  background:#fff;border-top:1px solid #e5e5e5;
+  text-align:center;padding:1rem 0;font-size:.875rem;color:#666
+}
+
+/* --------------------------------------------------
+   7. ≥768 px 桌機
+-------------------------------------------------- */
+@media (min-width:768px){
+  .nav-toggle{display:none}       /* 桌機隱藏漢堡 */
+  .main-nav{
+    position:static;display:block;box-shadow:none;
+  }
+  .main-nav ul{
+    flex-direction:row;gap:.75rem;
+    overflow:visible;white-space:normal;
+  }
+  .main-nav a{
+    border-radius:var(--radius);
+  }
+  .hero h2{font-size:2.5rem}
+}
